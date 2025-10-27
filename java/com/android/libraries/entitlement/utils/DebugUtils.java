@@ -17,7 +17,6 @@
 package com.android.libraries.entitlement.utils;
 
 import android.os.Build;
-import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -53,22 +52,14 @@ public final class DebugUtils {
      */
     @NonNull
     public static String getBypassEapAkaResponse() {
-        String bypassResponse = SystemProperties.get(PROP_FAKE_EAP_AKA_RESPONSE);
-        if (TextUtils.isEmpty(bypassResponse) || !isDebugBuild()) {
-            return "";
-        }
-        return bypassResponse;
+        return "";
     }
 
     private static boolean isDebugBuild() {
-        return !BUILD_TYPE_USER.equals(Build.TYPE);
+        return false;
     }
 
     private static boolean isPiiLoggable() {
-        if (!isDebugBuild()) {
-            return false;
-        }
-
-        return SystemProperties.getBoolean(PROP_PII_LOGGABLE, false);
+        return false;
     }
 }
